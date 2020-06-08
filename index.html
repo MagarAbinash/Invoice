@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="../bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <script src="../bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+    <script src="./index.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col bg-warning">
+                <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="item" value="option1" aria-label="...">SN
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="item" value="option1"aria-label="...">Description
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="item" value="option1"aria-label="...">Quantity
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="item" value="option1" aria-label="...">Price
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="item" value="option1" aria-label="...">Amount
+                </div>
+            </div>
+            <div class="col bg-success">
+                <button class="btn btn-primary" onclick="getValue()">Show</button>
+                <h1>Result</h1>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
