@@ -79,6 +79,9 @@
                             <div class="modal-body">
                                 <form id="editForm">
                                     <div class="form-group">
+                                        <input type="hidden" class="form-control" id="editId">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="editName">Price:</label>
                                         <input type="text" class="form-control" id="editName" placeholder="Enter Price ...">
                                     </div>
@@ -93,7 +96,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveEdit()">Save</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>

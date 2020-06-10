@@ -41,6 +41,7 @@ function addItem(event) {
     showCart();
 
     subTotal(newItem.price, newItem.qty);
+    showTotal();
 
     event.preventDefault();
 }
@@ -69,13 +70,30 @@ function editInvoice(id) {
     // editItem = true;
     var newName = document.getElementById('editName');
     var newPrice = document.getElementById('editPrice');
-    var newQuantity = document.getElementById('editQuantity')
+    var newQuantity = document.getElementById('editQuantity');
+    var newId = document.getElementById('editId');
     for (let i = 0; i < items.length; i++) {
         if (items[i].id == id) {
-            console.log("Edit me " + id + " and editable: " + editItem);
+            // console.log("Edit me " + id + " and editable: " + editItem);
+            newId.value = items[i].id;
             newName.value = items[i].name;
             newPrice.value = items[i].price;
             newQuantity.value = items[i].qty;
+        }
+    }
+}
+
+function saveEdit() {
+    var newId = document.getElementById('editId').value;
+    var newName = document.getElementById('editName').value;
+    var newPrice = document.getElementById('editPrice').value;
+    var newQuantity = document.getElementById('editQuantity').value;
+    // console.log("Save this edited file "+ " "+ newId + newName +" "+newPrice+" "+newQuantity);
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id == newId) {
+            items[i].name = newName;
+            items[i].price = newPrice;
+            items[i].qty = newQuantity;
         }
     }
     showCart();
@@ -101,8 +119,7 @@ function subTotal(price, qty) {
     // showTotal();
 }
 
-// function showTotal() {
-//     var t = sub_total.reduce((a, b) => a+b, 0);
-//     console.log(t)
-//     total.innerHTML = "<div>This shit why not working</div>";
-// }
+function showTotal() {
+    var t = sub_total.reduce((a, b) => a+b, 0);
+    console.log(t)
+}
