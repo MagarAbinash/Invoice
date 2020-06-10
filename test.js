@@ -111,6 +111,8 @@ function deleteInvoice(id) {
     }
 }
 
+var final = 0;
+
 function getSubTotal() {
     var shoTotal = document.getElementById('subToTal');
     shoTotal.value ="";
@@ -118,15 +120,20 @@ function getSubTotal() {
     for (let i = 0; i < sub_total.length; i++) {
         total.push(sub_total[i].total);
     }
-
-    let final = String(total.reduce((a, b) => a + b, 0));
+    final = String(total.reduce((a, b) => a + b, 0));
     shoTotal.innerHTML = final;
 
-    calculateVat(final);
+    getDiscount();
 }
 
 function getDiscount(){
-
+    var disPer = document.getElementById('discountPer').value;
+    var shoDis = document.getElementById('discountAmt');
+    var disAmt = Number((final / 100) * disPer);
+    shoDis.innerHTML = String(disAmt);
+    var ttl = Number(final) - disAmt;
+    calculateVat(ttl);
+    // console.log(disAmt);
 }
 
 function calculateVat(subTotal) {

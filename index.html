@@ -49,34 +49,64 @@
             <div class="col col-xl-6 bg-success">
                 <div class="container">
                     <div class="row">
-                    <table class="table table-hover table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Prodcut</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Option</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cart">
-                            
-                        </tbody>
-                    </table>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Prodcut</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Option</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cart">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-xl-12" id="subToTal">
-                            
+                        <div class="col-xl-12 pull-right col-flex">
+                            <table class="table table-borderless">
+                                <tr class="text-right">
+                                    <th>Sub Total:- </th>
+                                    <th id="subToTal"></th>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="col-xl-12" id="discountAmt">
-                        
+                        <div class="col-xl-12 pull-right">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th class="text-right">Discount %:- </th>
+                                    <th class="w-25"><input value=0 onblur="getDiscount()" type="text" id="discountPer"></th>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="col-xl-12" id="vatAmt">
-                        
+                        <div class="col-xl-12 pull-right">
+                            <table class="table table-borderless">
+                                <tr class="text-right">
+                                    <th>Discount Amt:- </th>
+                                    <th id="discountAmt"></th>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="col-xl-12" id="totalAmt">
-                        
+                        <div class="col-xl-12 pull-right">
+                            <table class="table table-borderless">
+                                <tr class="text-right">
+                                    <th>Vat 13%:- </th>
+                                    <th id="vatAmt"></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-xl-12 pull-right">
+                            <table class="table table-borderless">
+                                <tr class="text-right">
+                                    <th>Total:- </th>
+                                    <th id="totalAmt"></th>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
