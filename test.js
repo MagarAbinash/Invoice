@@ -4,6 +4,7 @@ var items = [];
 
 var itemId = 0;
 var sub_total = [];
+editItem = false;
 // var total = document.getElementById('subTotal');
 
 function addItem(event) {
@@ -51,17 +52,33 @@ function showCart() {
     for (let index = 0; index < items.length; index++) {
         cartEle.innerHTML += '<tr>' +
             '<th scope="row">' + items[index].id + '</th>' +
-            '<td>' + items[index].name + '</td>' +
-            '<td>' + items[index].qty + '</td>' +
-            '<td>' + items[index].price + '</td>' +
+            '<td contenteditable='+ editItem +'>' + items[index].name + '</td>' +
+            '<td contenteditable=' + editItem + '>' + items[index].qty + '</td>' +
+            '<td contenteditable=' + editItem + '>' + items[index].price + '</td>' +
             '<td>'+ calculateAmt(items[index].price, items[index].qty) +'</td>' +
-            '<td><button class="btn btn-primary btn-sm btn-inline" onclick="editInvoice(\'' + items[index].id + '\')">Edit</button>'+
-            '<button class="btn btn-danger btn-sm btn-inline" onclick ="deleteInvoice(\''+ items[index].id +'\')">Delete</button></td></tr>';
+            '<td>'+
+                '<div>' +
+                    '<button class="btn btn-primary btn-sm btn-inline" data-toggle="modal" data-target="#myModal" onclick="editInvoice(\'' + items[index].id + '\')">Edit</button>' +
+                    '<button class="btn btn-danger btn-sm btn-inline" onclick ="deleteInvoice(\'' + items[index].id + '\')">Delete</button>' +
+                '</div>'
+            '</td></tr>';
     }
 }
 
 function editInvoice(id) {
-    console.log("Edit me "+ id);
+    // editItem = true;
+    var newName = document.getElementById('editName');
+    var newPrice = document.getElementById('editPrice');
+    var newQuantity = document.getElementById('editQuantity')
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id == id) {
+            console.log("Edit me " + id + " and editable: " + editItem);
+            newName.value = items[i].name;
+            newPrice.value = items[i].price;
+            newQuantity.value = items[i].qty;
+        }
+    }
+    showCart();
 }
 
 function deleteInvoice(id) {
