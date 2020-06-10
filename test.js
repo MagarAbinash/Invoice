@@ -7,6 +7,11 @@ var sub_total = [];
 editItem = false;
 // var total = document.getElementById('subTotal');
 
+// onblur ma validation 
+//validataion ko lagi function create gar (data , data ,dta )  itemref , 3 golbal value where valid = false ;
+// if valid ==true only add update gar 
+// onclick ma check d valid info ani add 
+
 function addItem(event) {
     var itemName = document.getElementById('itemAddName').value;
     var itemPrice = document.getElementById('itemAddPrice').value;
@@ -15,53 +20,45 @@ function addItem(event) {
     var newItem = { 
         id: itemId, 
         name: itemName,
-        setName: (name) => {
-            this.name = name;
-        },
-        getName: () => {
-            return this.name;
-        },
-        price: itemPrice,
-        setPrice: (price) => {
-            this.price = price;
-        },
-        getPrice: () => {
-            return this.price;
-        }, 
-        qty: itemQuantity,
-        setQty: (qty) => {
-            this.qty = qty;
-        },
-        getQty: () => {
-            return this.qty;
+        price: Number(itemPrice),
+        qty: Number(itemQuantity),
+        total: function () {
+            return this.qty * this.price;
         }
     };
     items.push(newItem);
 
-    showCart();
+    for_sub_total = {
+        id: itemId,
+        total: newItem.total()
+    }
+    // sub_total.push(newItem.total());
+    // console.log(for_sub_total);
+    sub_total.push(for_sub_total);
+    getSubTotal();
 
-    subTotal(newItem.price, newItem.qty);
-    showTotal();
+    showCart();
 
     event.preventDefault();
 }
 
-
+// arrayName.map((array , key)=>{})
 function showCart() {
     var cartEle = document.getElementById('cart');
     cartEle.innerHTML = "";
+    // console.log(items)
     for (let index = 0; index < items.length; index++) {
         cartEle.innerHTML += '<tr>' +
             '<th scope="row">' + items[index].id + '</th>' +
             '<td contenteditable='+ editItem +'>' + items[index].name + '</td>' +
             '<td contenteditable=' + editItem + '>' + items[index].qty + '</td>' +
             '<td contenteditable=' + editItem + '>' + items[index].price + '</td>' +
-            '<td>'+ calculateAmt(items[index].price, items[index].qty) +'</td>' +
+            '<td>' + items[index].total() + '</td>' +
             '<td>'+
                 '<div>' +
                     '<button class="btn btn-primary btn-sm btn-inline" data-toggle="modal" data-target="#myModal" onclick="editInvoice(\'' + items[index].id + '\')">Edit</button>' +
                     '<button class="btn btn-danger btn-sm btn-inline" onclick ="deleteInvoice(\'' + items[index].id + '\')">Delete</button>' +
-                '</div>'
+                '</div>'+
             '</td></tr>';
     }
 }
@@ -94,32 +91,54 @@ function saveEdit() {
             items[i].name = newName;
             items[i].price = newPrice;
             items[i].qty = newQuantity;
+            sub_total[i].total = items[i].total(); 
         }
     }
+    getSubTotal();
     showCart();
 }
 
 function deleteInvoice(id) {
     for (let i = 0; i < items.length; i++) {
         if (items[i].id == id) {
-            console.log("Doing splice");
+            // console.log("Doing splice");
             items.splice(i, 1);
+            itemId -= 1;
+            sub_total.splice(i, 1);
             showCart();
+            getSubTotal();
         }
     }
 }
 
-function calculateAmt(price, qty) {
-    var amt =  price * qty;
-    return amt;
+function getSubTotal() {
+    var shoTotal = document.getElementById('subToTal');
+    shoTotal.value ="";
+    let total = [];
+    for (let i = 0; i < sub_total.length; i++) {
+        total.push(sub_total[i].total);
+    }
+
+    let final = String(total.reduce((a, b) => a + b, 0));
+    shoTotal.innerHTML = final;
+
+    calculateVat(final);
 }
 
-function subTotal(price, qty) {
-    sub_total.push(price * qty);
-    // showTotal();
+function getDiscount(){
+
 }
 
-function showTotal() {
-    var t = sub_total.reduce((a, b) => a+b, 0);
-    console.log(t)
+function calculateVat(subTotal) {
+    var shoVat = document.getElementById('vatAmt');
+    let vat = Number((subTotal/100)*13);
+    shoVat.innerHTML = String(vat);
+    sumTotal(vat, subTotal);
+    // console.log(vat);
+}
+
+function sumTotal(vat, subTotal) {
+    var sumTotalSho = document.getElementById('totalAmt');
+    let sumtoTal = Number(subTotal) + Number(vat);
+    sumTotalSho.innerHTML = String(sumtoTal);
 }
