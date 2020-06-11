@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    
+
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -23,157 +24,154 @@
         body {
             background-color: #ece9e6;
         }
-        table{
-            padding: 0px;
-        }
     </style>
 </head>
+
 <body>
-    <div class="container-fluid container-flex ">
-        <div class="row flex-wrap">
-            <div class="col col-xl-3">
-                <div class="row">
-                    <div class="container m-2">
-                        <div class="jumbotron bg-white col-xl-12">
-                            <h3>Add new Items</h3>
-                            <form id="itemAddForm">
-                                <div class="form-group">
-                                    <label for="itemAddName">Product Title:</label>
-                                    <input type="text" class="form-control" id="itemAddName" placeholder="Product name ...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="itemAddPrice">Price:</label>
-                                    <input type="number" class="form-control" id="itemAddPrice" placeholder="Enter Price ...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="itemAddQuantity">Quantity:</label>
-                                    <input type="number" class="form-control" id="itemAddQuantity" value=0>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add</button>
-                            </form>
+    <div class="d-flex flex-wrap">
+        <div class="col-xl-3 col-md-4 col-sm-12">
+            <div class="jumbotron bg-white m-2">
+                <h3>Add new Items</h3>
+                <form id="itemAddForm">
+                    <div class="form-group">
+                        <label for="itemAddName">Product Title:</label>
+                        <input type="text" class="form-control" id="itemAddName" placeholder="Product name ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemAddPrice">Price:</label>
+                        <input type="number" class="form-control" id="itemAddPrice" placeholder="Enter Price ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemAddQuantity">Quantity:</label>
+                        <input type="number" class="form-control" id="itemAddQuantity" value=0>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+            <div class="jumbotron bg-white m-2">
+                <h3>Invoices</h3>
+            </div>
+        </div>
+        <div class="col-xl-9 col-md-8 col-sm-12">
+            <div class="jumbotron bg-white m-2">
+                <h3 class="m-3 text-center" contenteditable="true">Invoice Title</h3>
+                <hr>
+                <div class="row d-flex flex-wrap">
+                    <div class="col-xl-6 col-sm-6 col-md-6">
+                        <div class="float-left d-flex flex-wrap">
+                            <label class="m-2" for="name">Name:</label>
+                            <input class="form-control" type="text" id="customerName" placeholder="Enter Customer name">
                         </div>
                     </div>
+                    <div class="col-xl-6 col-sm-6 col-md-6">
+                        <div class="float-right d-flex flex-wrap">
+                            <div class="mr-3">
+                                <label class="m-2" for="invoiceId">Invoice#:</label>
+                                <input class="form-control" type="text" id="invoiceId">
+                            </div>
+                            <div class="">
+                                <label class="m-2" for="date">Date:</label>
+                                <input class="form-control" type="date" id="date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <hr>
+                    <table class="table table-borderless">
+                        <thead class="mb-5">
+                            <tr style="border-bottom: solid; border-top: solid;">
+                                <th scope="col">#</th>
+                                <th scope="col">Prodcut</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Option</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart">
+
+                        </tbody>
+                        <tfoot class="text-right">
+                            <tr>
+                                <td colspan="6" style="border-top: solid;"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="border: dashed;" colspan="4" rowspan="6"
+                                    contenteditable="true">Here
+                                    goes the notes</td>
+                            </tr>
+                            <tr>
+                                <th>Sub Total: </th>
+                                <th id="subToTal" style="border-right: dashed;" class="text-left"></th>
+                            </tr>
+                            <tr>
+                                <th>Discount %: </th>
+                                <th class="text-left"
+                                    style="border-bottom: 1px solid black; border-right: dashed; width: 150px;"
+                                    contenteditable="true" id="discountPer" onblur="getDiscount()"></th>
+                            </tr>
+                            <tr>
+                                <th style="width: 150px;">Discount Amt: </th>
+                                <th class="text-left" style="border-right: dashed;" id="discountAmt"></th>
+                            </tr>
+                            <tr>
+                                <th>Vat 13%: </th>
+                                <th class="text-left" style="border-right: dashed;" id="vatAmt"></th>
+                            </tr>
+                            <tr style="border-bottom: dashed;">
+                                <th>Total: </th>
+                                <th class="text-left" style="border-right: dashed;" id="totalAmt"></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="footer">
+                    This is just a footer
                 </div>
             </div>
-            <div class="col col-xl-9">
-                <div class="row"></div>
-                    <div class="container-fluid m-2">
-                        <div class="col-xl-12 bg-white jumbotron">
-                            <h3 class="m-3 text-center" contenteditable="true">Invoice Title</h3>
-                            <hr>
-                            <div class="row ">
-                                <div class="col d-flex">
-                                    <div class="float-left d-flex">
-                                        <label class="m-2" for="name">Name:</label>
-                                        <!-- <textarea class="form-control" id="name" cols="20" rows="1"></textarea> -->
-                                        <input class="form-control" type="text" id="customerName" placeholder="Enter Customer name">
-                                    </div>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editForm">
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="editId">
                                 </div>
-                                <div class="col">
-                                    <table class="float-right">
-                                        <tr>
-                                            <th>Invoice#:</th>
-                                            <td><input class="form-control" type="text" id="invoiceId"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Date:</th>
-                                            <td><input class="form-control" type="date" id="date"></td>
-                                        </tr>
-                                    </table>
+                                <div class="form-group">
+                                    <label for="editName">Price:</label>
+                                    <input type="text" class="form-control" id="editName" placeholder="Enter Price ...">
                                 </div>
-                            </div>
-                            <div class="table-responsive">
-                                <hr>
-                                <table class="table table-borderless">
-                                    <thead class="mb-5">
-                                        <tr style="border-bottom: solid; border-top: solid;">
-                                            <th scope="col">#</th>
-                                            <th scope="col">Prodcut</th>
-                                            <th scope="col">Qty</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Option</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="cart">
-                                        
-                                    </tbody>
-                                    <tfoot class="text-right">
-                                        <tr><td colspan="6" style="border-top: solid;"></td></tr>
-                                        <!-- <tr><td colspan="6"></td></tr> -->
-                                        <tr>
-                                            <td class="text-left" style="border: dashed;" colspan="4" rowspan="6" contenteditable="true">Here goes the notes</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Sub Total: </th>
-                                            <th id="subToTal" style="border-right: dashed;" class="text-left"></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Discount %: </th>
-                                            <th class="text-left" style="border-bottom: 1px solid black; border-right: dashed; width: 150px;" contenteditable="true" id="discountPer" onblur="getDiscount()"></th>
-                                        </tr>
-                                        <tr>
-                                            <th style="width: 150px;">Discount Amt: </th>
-                                            <th class="text-left" style="border-right: dashed;" id="discountAmt"></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Vat 13%: </th>
-                                            <th class="text-left" style="border-right: dashed;" id="vatAmt"></th>
-                                        </tr>
-                                        <tr style="border-bottom: dashed;">
-                                            <th>Total: </th>
-                                            <th class="text-left" style="border-right: dashed;" id="totalAmt"></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="footer">
-                                This is just a footer
-                            </div>
+                                <div class="form-group">
+                                    <label for="editPrice">Price:</label>
+                                    <input type="number" class="form-control" id="editPrice"
+                                        placeholder="Enter Price ...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editQuantity">Quantity:</label>
+                                    <input type="number" class="form-control" id="editQuantity" value=0>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                onclick="saveEdit()">Save</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                </div>
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-                
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Edit</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="editForm">
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" id="editId">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="editName">Price:</label>
-                                        <input type="text" class="form-control" id="editName" placeholder="Enter Price ...">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="editPrice">Price:</label>
-                                        <input type="number" class="form-control" id="editPrice" placeholder="Enter Price ...">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="editQuantity">Quantity:</label>
-                                        <input type="number" class="form-control" id="editQuantity" value=0>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveEdit()">Save</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- <script src="./index.js"></script> -->
     <script src="./test.js"></script>
 
 </body>
+
 </html>
