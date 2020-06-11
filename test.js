@@ -99,14 +99,16 @@ function saveEdit() {
 }
 
 function deleteInvoice(id) {
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].id == id) {
-            // console.log("Doing splice");
-            items.splice(i, 1);
-            itemId -= 1;
-            sub_total.splice(i, 1);
-            showCart();
-            getSubTotal();
+    if (confirm("Delete Confirmation")) {
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].id == id) {
+                // console.log("Doing splice");
+                items.splice(i, 1);
+                itemId -= 1;
+                sub_total.splice(i, 1);
+                showCart();
+                getSubTotal();
+            }
         }
     }
 }
@@ -127,7 +129,7 @@ function getSubTotal() {
 }
 
 function getDiscount(){
-    var disPer = document.getElementById('discountPer').value;
+    var disPer = document.getElementById('discountPer').innerText;
     var shoDis = document.getElementById('discountAmt');
     var disAmt = Number((final / 100) * disPer);
     shoDis.innerHTML = String(disAmt);

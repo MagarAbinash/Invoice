@@ -18,14 +18,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: #ece9e6;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col col-xl-6 bg-warning">
+            <div class="col col-xl-3">
                 <div class="row">
-                    <div class="container m-3">
-                        <div class="jumbotron col-xl-12">
+                    <div class="container m-2">
+                        <div class="jumbotron bg-white col-xl-12">
                             <h3>Add new Items</h3>
                             <form id="itemAddForm">
                                 <div class="form-group">
@@ -46,67 +52,79 @@
                     </div>
                 </div>
             </div>
-            <div class="col col-xl-6 bg-success">
-                <div class="container">
+            <div class="col col-xl-9">
+                <div class="container m-2">
                     <div class="row">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-dark">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Prodcut</th>
-                                        <th scope="col">Qty</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Option</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cart">
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12 pull-right col-flex">
-                            <table class="table table-borderless">
-                                <tr class="text-right">
-                                    <th>Sub Total:- </th>
-                                    <th id="subToTal"></th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-xl-12 pull-right">
-                            <table class="table table-borderless">
-                                <tr>
-                                    <th class="text-right">Discount %:- </th>
-                                    <th class="w-25"><input value=0 onblur="getDiscount()" type="text" id="discountPer"></th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-xl-12 pull-right">
-                            <table class="table table-borderless">
-                                <tr class="text-right">
-                                    <th>Discount Amt:- </th>
-                                    <th id="discountAmt"></th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-xl-12 pull-right">
-                            <table class="table table-borderless">
-                                <tr class="text-right">
-                                    <th>Vat 13%:- </th>
-                                    <th id="vatAmt"></th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-xl-12 pull-right">
-                            <table class="table table-borderless">
-                                <tr class="text-right">
-                                    <th>Total:- </th>
-                                    <th id="totalAmt"></th>
-                                </tr>
-                            </table>
+                        <div class="col-xl-11 bg-white jumbotron">
+                            <h3 class="m-3 text-center" contenteditable="true">Invoice Title</h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="float-left d-flex">
+                                        <label class="m-2" for="name">Name:</label>
+                                        <!-- <textarea class="form-control" id="name" cols="20" rows="1"></textarea> -->
+                                        <input class="form-control" type="text" id="customerName" placeholder="Enter Customer name">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <table class="float-right">
+                                        <tr>
+                                            <th>Invoice#:</th>
+                                            <td><input class="form-control" type="text" id="invoiceId"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Due Date:</th>
+                                            <td><input class="form-control" type="date" id="dueDate"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date:</th>
+                                            <td><input class="form-control" type="date" id="date"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <hr>
+                                <table class="table table-borderless">
+                                    <thead class="mb-5">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Prodcut</th>
+                                            <th scope="col">Qty</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cart">
+                                        
+                                    </tbody>
+                                    <tfoot class="text-right">
+                                        <tr><td colspan="6" style="border-top: 1px solid black;"></td></tr>
+                                        <!-- <tr><td colspan="6"></td></tr> -->
+                                        <tr>
+                                            <th colspan="5">Sub Total: </th>
+                                            <th id="subToTal" class="text-left"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5">Discount %: </th>
+                                            <th class="text-left" style="border-bottom: 1px solid black; width: 150px;" contenteditable="true" id="discountPer" onblur="getDiscount()"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5">Discount Amt: </th>
+                                            <th class="text-left" id="discountAmt"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5">Vat 13%: </th>
+                                            <th class="text-left" id="vatAmt"></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5">Total: </th>
+                                            <th class="text-left" id="totalAmt"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,7 +134,7 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Modal Header</h4>
+                                <h4 class="modal-title">Edit</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
