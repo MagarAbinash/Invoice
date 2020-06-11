@@ -1,11 +1,17 @@
 document.getElementById('itemAddForm').addEventListener('submit', addItem);
+let forDate = new Date();
+let year = forDate.getFullYear();
+let month = forDate.getMonth();
+let day = forDate.getDate();
+document.querySelector("#date").innerHTML = String(year+"-"+month+'-'+day);
+
 
 var items = [];
 
 var itemId = 0;
 var sub_total = [];
-editItem = false;
-// var total = document.getElementById('subTotal');
+var final = 0;
+let invoice = [];
 
 // onblur ma validation 
 //validataion ko lagi function create gar (data , data ,dta )  itemref , 3 golbal value where valid = false ;
@@ -32,8 +38,6 @@ function addItem(event) {
         id: itemId,
         total: newItem.total()
     }
-    // sub_total.push(newItem.total());
-    // console.log(for_sub_total);
     sub_total.push(for_sub_total);
     getSubTotal();
 
@@ -42,17 +46,15 @@ function addItem(event) {
     event.preventDefault();
 }
 
-// arrayName.map((array , key)=>{})
 function showCart() {
     var cartEle = document.getElementById('cart');
     cartEle.innerHTML = "";
-    // console.log(items)
     for (let index = 0; index < items.length; index++) {
         cartEle.innerHTML += '<tr>' +
             '<th scope="row">' + items[index].id + '</th>' +
-            '<td contenteditable='+ editItem +'>' + items[index].name + '</td>' +
-            '<td contenteditable=' + editItem + '>' + items[index].qty + '</td>' +
-            '<td contenteditable=' + editItem + '>' + items[index].price + '</td>' +
+            '<td>' + items[index].name + '</td>' +
+            '<td>' + items[index].qty + '</td>' +
+            '<td>' + items[index].price + '</td>' +
             '<td>' + items[index].total() + '</td>' +
             '<td>'+
                 '<div>' +
@@ -64,14 +66,12 @@ function showCart() {
 }
 
 function editInvoice(id) {
-    // editItem = true;
     var newName = document.getElementById('editName');
     var newPrice = document.getElementById('editPrice');
     var newQuantity = document.getElementById('editQuantity');
     var newId = document.getElementById('editId');
     for (let i = 0; i < items.length; i++) {
         if (items[i].id == id) {
-            // console.log("Edit me " + id + " and editable: " + editItem);
             newId.value = items[i].id;
             newName.value = items[i].name;
             newPrice.value = items[i].price;
@@ -85,7 +85,6 @@ function saveEdit() {
     var newName = document.getElementById('editName').value;
     var newPrice = document.getElementById('editPrice').value;
     var newQuantity = document.getElementById('editQuantity').value;
-    // console.log("Save this edited file "+ " "+ newId + newName +" "+newPrice+" "+newQuantity);
     for (let i = 0; i < items.length; i++) {
         if (items[i].id == newId) {
             items[i].name = newName;
@@ -102,7 +101,6 @@ function deleteInvoice(id) {
     if (confirm("Delete Confirmation")) {
         for (let i = 0; i < items.length; i++) {
             if (items[i].id == id) {
-                // console.log("Doing splice");
                 items.splice(i, 1);
                 itemId -= 1;
                 sub_total.splice(i, 1);
@@ -113,7 +111,7 @@ function deleteInvoice(id) {
     }
 }
 
-var final = 0;
+
 
 function getSubTotal() {
     var shoTotal = document.getElementById('subToTal');
@@ -135,7 +133,6 @@ function getDiscount(){
     shoDis.innerHTML = String(disAmt);
     var ttl = Number(final) - disAmt;
     calculateVat(ttl);
-    // console.log(disAmt);
 }
 
 function calculateVat(subTotal) {
@@ -143,11 +140,76 @@ function calculateVat(subTotal) {
     let vat = Number((subTotal/100)*13);
     shoVat.innerHTML = String(vat);
     sumTotal(vat, subTotal);
-    // console.log(vat);
 }
 
 function sumTotal(vat, subTotal) {
     var sumTotalSho = document.getElementById('totalAmt');
     let sumtoTal = Number(subTotal) + Number(vat);
     sumTotalSho.innerHTML = String(sumtoTal);
+}
+
+function reset() {
+    if (items.length != 0 || itemId != 0 || sub_total.length != 0) {
+        if (confirm("Do you want to reset all?")) {
+            items = [];
+            itemId = 0;
+            sub_total = [];
+            document.getElementById('customerName').value = "";
+            document.getElementById('discountPer').innerText = "0";
+            showCart();
+            getSubTotal();
+        }
+    } else {
+        alert("No item added in the invoice");
+    }
+}
+
+
+function saveInvoice() {
+
+    let invDate = document.getElementById('date').innerText;
+    let cname = document.getElementById('customerName').value;
+    let invItems = items;
+    let invTotal = document.getElementById('totalAmt').innerText;
+    console.log(cname);
+    if (cname != "" && items.length != 0) {
+        if (confirm("Do you want to save this invoice?")) {
+            let savingInvoice = {
+                id: Math.random(),
+                date: invDate,
+                name: cname,
+                item: invItems,
+                amounts: invTotal
+            }
+
+            invoice.push(savingInvoice);
+            items = [];
+            itemId = 0;
+            sub_total = [];
+            document.getElementById('customerName').value = "";
+            document.getElementById('discountPer').innerText = "0";
+            showCart();
+            showInvoice();
+            getSubTotal();
+        }           
+    } else {
+        alert("You must enter customer name or item must be added!!");
+    }
+
+}
+
+function showInvoice() {
+    let shoInvoice = document.getElementById('invoices');
+    shoInvoice.innerHTML = "";
+    for (let i = 0; i < invoice.length; i++) {
+        shoInvoice.innerHTML += 
+        '<div class=\'card\'>'+
+            '<strong class="card-title">'+ invoice[i].name +'</strong>'+
+            '<div class="card-text">'+
+                '<p>Date: '+ invoice[i].date +'</p>'+
+                '<p>Grand Total: '+ invoice[i].amounts +'</p>'+
+            '</div>'+
+            '<a href="#" class="btn btn-primary btn-sm">Button</a>' +
+        '</div>';
+    }
 }

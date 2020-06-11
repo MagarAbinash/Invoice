@@ -35,48 +35,52 @@
                 <form id="itemAddForm">
                     <div class="form-group">
                         <label for="itemAddName">Product Title:</label>
-                        <input type="text" class="form-control" id="itemAddName" placeholder="Product name ...">
+                        <input type="text" class="form-control" id="itemAddName" onfocus= "this.value=''" placeholder="Product name ...">
                     </div>
                     <div class="form-group">
                         <label for="itemAddPrice">Price:</label>
-                        <input type="number" class="form-control" id="itemAddPrice" placeholder="Enter Price ...">
+                        <input type="number" class="form-control" id="itemAddPrice" onfocus= "this.value=''" placeholder="Price">
                     </div>
                     <div class="form-group">
                         <label for="itemAddQuantity">Quantity:</label>
-                        <input type="number" class="form-control" id="itemAddQuantity" value=0>
+                        <input type="number" class="form-control" id="itemAddQuantity" onfocus= "this.value=''" placeholder="Quantity">
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
             <div class="jumbotron bg-white m-2">
                 <h3>Invoices</h3>
+                <div id="invoices">
+
+                </div>
             </div>
         </div>
         <div class="col-xl-9 col-md-8 col-sm-12">
             <div class="jumbotron bg-white m-2">
-                <h3 class="m-3 text-center" contenteditable="true">Invoice Title</h3>
+                <h3 class="m-3 text-center">Invoice</h3>
                 <hr>
                 <div class="row d-flex flex-wrap">
                     <div class="col-xl-6 col-sm-6 col-md-6">
                         <div class="float-left d-flex flex-wrap">
-                            <label class="m-2" for="name">Name:</label>
+                            <label class="m-2" for="customerName">Name:</label>
                             <input class="form-control" type="text" id="customerName" placeholder="Enter Customer name">
                         </div>
                     </div>
                     <div class="col-xl-6 col-sm-6 col-md-6">
                         <div class="float-right d-flex flex-wrap">
-                            <div class="mr-3">
+                            <!-- <div class="mr-3">
                                 <label class="m-2" for="invoiceId">Invoice#:</label>
                                 <input class="form-control" type="text" id="invoiceId">
-                            </div>
+                            </div> -->
                             <div class="">
                                 <label class="m-2" for="date">Date:</label>
-                                <input class="form-control" type="date" id="date">
+                                <!-- <input class="form-control" type="date" id="date"> -->
+                                <strong class="form-control" id = "date"></strong>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive col">
                     <hr>
                     <table class="table table-borderless">
                         <thead class="mb-5">
@@ -96,9 +100,10 @@
                             <tr>
                                 <td colspan="6" style="border-top: solid;"></td>
                             </tr>
-                            <tr>
-                                <td class="text-left" style="border: dashed;" colspan="4" rowspan="6"
-                                    contenteditable="true">Here
+                            <tr style="border: dashed;">
+                                <td class="text-left" colspan="4" rowspan="6"
+                                    style="border-right: dashed;"
+                                    contenteditable="true" onfocus="this.innerText=''">Here
                                     goes the notes</td>
                             </tr>
                             <tr>
@@ -109,7 +114,7 @@
                                 <th>Discount %: </th>
                                 <th class="text-left"
                                     style="border-bottom: 1px solid black; border-right: dashed; width: 150px;"
-                                    contenteditable="true" id="discountPer" onblur="getDiscount()"></th>
+                                    contenteditable="true" id="discountPer" onblur="getDiscount()">0</th>
                             </tr>
                             <tr>
                                 <th style="width: 150px;">Discount Amt: </th>
@@ -126,8 +131,9 @@
                         </tfoot>
                     </table>
                 </div>
-                <div class="footer">
-                    This is just a footer
+                <div class="footer float-right">
+                    <button class="btn btn-primary btn-sm btn-inline mr-2" onclick="saveInvoice()">Save</button>
+                    <button class="btn btn-danger btn-sm btn-inline mr-3" onclick="reset()">Reset</button>
                 </div>
             </div>
             <div class="modal fade" id="myModal" role="dialog">
@@ -146,16 +152,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="editName">Price:</label>
-                                    <input type="text" class="form-control" id="editName" placeholder="Enter Price ...">
+                                    <input type="text" class="form-control" id="editName" placeholder="Enter Price ..." onfocus= "this.value=''">
                                 </div>
                                 <div class="form-group">
                                     <label for="editPrice">Price:</label>
                                     <input type="number" class="form-control" id="editPrice"
-                                        placeholder="Enter Price ...">
+                                        placeholder="Enter Price ..." onfocus= "this.value=''">
                                 </div>
                                 <div class="form-group">
                                     <label for="editQuantity">Quantity:</label>
-                                    <input type="number" class="form-control" id="editQuantity" value=0>
+                                    <input type="number" class="form-control" id="editQuantity" onfocus= "this.value=''">
                                 </div>
                             </form>
                         </div>
