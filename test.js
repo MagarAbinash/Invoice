@@ -56,7 +56,7 @@ function showCart() {
             '<td>' + items[index].total() + '</td>' +
             '<td>'+
                 '<div>' +
-                    '<button class="btn btn-primary btn-sm btn-inline" data-toggle="modal" data-target="#myModal" onclick="editInvoice(\'' + items[index].id + '\')">Edit</button>' +
+                    '<button class="btn btn-primary btn-sm btn-inline mr-2" data-toggle="modal" data-target="#myModal" onclick="editInvoice(\'' + items[index].id + '\')">Edit</button>' +
                     '<button class="btn btn-danger btn-sm btn-inline" onclick ="deleteInvoice(\'' + items[index].id + '\')">Delete</button>' +
                 '</div>'+
             '</td></tr>';

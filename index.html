@@ -73,10 +73,6 @@
                                             <td><input class="form-control" type="text" id="invoiceId"></td>
                                         </tr>
                                         <tr>
-                                            <th>Due Date:</th>
-                                            <td><input class="form-control" type="date" id="dueDate"></td>
-                                        </tr>
-                                        <tr>
                                             <th>Date:</th>
                                             <td><input class="form-control" type="date" id="date"></td>
                                         </tr>
@@ -87,7 +83,7 @@
                                 <hr>
                                 <table class="table table-borderless">
                                     <thead class="mb-5">
-                                        <tr>
+                                        <tr style="border-bottom: solid; border-top: solid;">
                                             <th scope="col">#</th>
                                             <th scope="col">Prodcut</th>
                                             <th scope="col">Qty</th>
@@ -100,30 +96,36 @@
                                         
                                     </tbody>
                                     <tfoot class="text-right">
-                                        <tr><td colspan="6" style="border-top: 1px solid black;"></td></tr>
+                                        <tr><td colspan="6" style="border-top: solid;"></td></tr>
                                         <!-- <tr><td colspan="6"></td></tr> -->
                                         <tr>
-                                            <th colspan="5">Sub Total: </th>
-                                            <th id="subToTal" class="text-left"></th>
+                                            <td class="text-left" style="border: dashed;" colspan="4" rowspan="6" contenteditable="true">Here goes the notes</td>
                                         </tr>
                                         <tr>
-                                            <th colspan="5">Discount %: </th>
-                                            <th class="text-left" style="border-bottom: 1px solid black; width: 150px;" contenteditable="true" id="discountPer" onblur="getDiscount()"></th>
+                                            <th>Sub Total: </th>
+                                            <th id="subToTal" style="border-right: dashed;" class="text-left"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="5">Discount Amt: </th>
-                                            <th class="text-left" id="discountAmt"></th>
+                                            <th>Discount %: </th>
+                                            <th class="text-left" style="border-bottom: 1px solid black; border-right: dashed; width: 150px;" contenteditable="true" id="discountPer" onblur="getDiscount()"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="5">Vat 13%: </th>
-                                            <th class="text-left" id="vatAmt"></th>
+                                            <th>Discount Amt: </th>
+                                            <th class="text-left" style="border-right: dashed;" id="discountAmt"></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="5">Total: </th>
-                                            <th class="text-left" id="totalAmt"></th>
+                                            <th>Vat 13%: </th>
+                                            <th class="text-left" style="border-right: dashed;" id="vatAmt"></th>
+                                        </tr>
+                                        <tr style="border-bottom: dashed;">
+                                            <th>Total: </th>
+                                            <th class="text-left" style="border-right: dashed;" id="totalAmt"></th>
                                         </tr>
                                     </tfoot>
                                 </table>
+                            </div>
+                            <div class="footer">
+                                This is just a footer
                             </div>
                         </div>
                     </div>
