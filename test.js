@@ -171,7 +171,11 @@ function saveInvoice() {
     let cname = document.getElementById('customerName').value;
     let invItems = items;
     let invTotal = document.getElementById('totalAmt').innerText;
-    console.log(cname);
+    let subttl = document.getElementById('subToTal').innerHTML;
+    let bilDis = document.getElementById('discountAmt').innerHTML;
+    let bilVat = document.getElementById('vatAmt').innerHTML;
+
+
     if (cname != "" && items.length != 0) {
         if (confirm("Do you want to save this invoice?")) {
             let savingInvoice = {
@@ -179,6 +183,9 @@ function saveInvoice() {
                 date: invDate,
                 name: cname,
                 item: invItems,
+                subT: subttl,
+                discount: bilDis,
+                vat: bilVat,
                 amounts: invTotal
             }
 
@@ -209,7 +216,40 @@ function showInvoice() {
                 '<p>Date: '+ invoice[i].date +'</p>'+
                 '<p>Grand Total: '+ invoice[i].amounts +'</p>'+
             '</div>'+
-            '<a href="#" class="btn btn-primary btn-sm">Button</a>' +
+        '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#showbills" onclick="showBills(\'' + invoice[i].id +'\')">Show</button >'+
+            // '<a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#showbills" onclick="showBills(\''+ invoice[i].id +'\')">Button</a>' +
         '</div>';
+    }
+}
+
+function showBills(id) {
+    let shobills = document.getElementById('showbillsDetails');
+    let bilnam = document.getElementById('billName');
+    let bilId = document.getElementById('billId');
+    let bilDate = document.getElementById('billDate');
+    let count = 0;
+    for (let i = 0; i < invoice.length; i++) {
+        if (invoice[i].id == id) {
+            bilnam.innerHTML = invoice[i].name;
+            bilId.innerHTML = invoice[i].id;
+            bilDate.innerHTML = invoice[i].date;
+
+        // console.log(invoice[i]);
+            for (let j = 0; j < invoice[i].item.length; j++) {
+                if (invoice[i].id == id) {
+                    shobills.innerHTML += '<tr>' +
+                    '<th scope="row">' + (++count) + '</th>' +
+                    '<td>' + invoice[i].item[j].name + '</td>' +
+                    '<td>' + invoice[i].item[j].qty + '</td>' +
+                    '<td>' + invoice[i].item[j].price + '</td>' +
+                    '<td>' + invoice[i].item[j].total() + '</td>' +
+                    '</tr>';
+                }
+            }
+            document.getElementById('billsubToTal').innerText = invoice[i].subT;
+            document.getElementById('billdiscountAmt').innerText = invoice[i].discount;
+            document.getElementById('billvatAmt').innerText = invoice[i].vat;
+            document.getElementById('billtotalAmt').innerText = invoice[i].amounts;
+        }
     }
 }

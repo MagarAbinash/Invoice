@@ -136,6 +136,85 @@
                     <button class="btn btn-danger btn-sm btn-inline mr-3" onclick="reset()">Reset</button>
                 </div>
             </div>
+
+
+
+            <div class="modal fade" id="showbills" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="jumbotron bg-white m-2" id="invoicebills">
+                                <h3 class="m-3 text-center">Invoice</h3>
+                                <hr>
+                                <div class="row d-flex flex-wrap">
+                                    <div class="col-xl-6 col-sm-6 col-md-6">
+                                        <div class="float-left d-flex flex-wrap">
+                                            <div class="m-2">Name: <span id="billName"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6 col-md-6">
+                                        <div class="float-right d-flex flex-wrap">
+                                            <div class="mr-3">
+                                                <div class="m-2">Invoice #: <span id="billId"></span></div>
+                                            </div>
+                                            <div class="">
+                                                <div class="m-2">Date: <span id="billDate"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive col">
+                                    <hr>
+                                    <table class="table table-borderless">
+                                        <thead class="mb-5">
+                                            <tr style="border-bottom: solid; border-top: solid;">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Prodcut</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="showbillsDetails">
+                            
+                                        </tbody>
+                                        <tfoot class="text-right">
+                                            <tr>
+                                                <td colspan="6" style="border-top: solid;"></td>
+                                            </tr>
+                                            <tr style="border: dashed;">
+                                                <td class="text-left" colspan="3" rowspan="5" style="border-right: dashed;" id="billsNote"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sub Total: </th>
+                                                <th id="billsubToTal" style="border-right: dashed;" class="text-left"></th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 150px;">Discount Amt: </th>
+                                                <th class="text-left" style="border-right: dashed;" id="billdiscountAmt"></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Vat 13%: </th>
+                                                <th class="text-left" style="border-right: dashed;" id="billvatAmt"></th>
+                                            </tr>
+                                            <tr style="border-bottom: dashed;">
+                                                <th>Total: </th>
+                                                <th class="text-left" style="border-right: dashed;" id="billtotalAmt"></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
 
