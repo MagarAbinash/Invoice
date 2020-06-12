@@ -227,6 +227,7 @@ function showBills(id) {
     let bilnam = document.getElementById('billName');
     let bilId = document.getElementById('billId');
     let bilDate = document.getElementById('billDate');
+    shobills.innerHTML = "";
     let count = 0;
     for (let i = 0; i < invoice.length; i++) {
         if (invoice[i].id == id) {
@@ -234,9 +235,7 @@ function showBills(id) {
             bilId.innerHTML = invoice[i].id;
             bilDate.innerHTML = invoice[i].date;
 
-        // console.log(invoice[i]);
             for (let j = 0; j < invoice[i].item.length; j++) {
-                if (invoice[i].id == id) {
                     shobills.innerHTML += '<tr>' +
                     '<th scope="row">' + (++count) + '</th>' +
                     '<td>' + invoice[i].item[j].name + '</td>' +
@@ -244,7 +243,6 @@ function showBills(id) {
                     '<td>' + invoice[i].item[j].price + '</td>' +
                     '<td>' + invoice[i].item[j].total() + '</td>' +
                     '</tr>';
-                }
             }
             document.getElementById('billsubToTal').innerText = invoice[i].subT;
             document.getElementById('billdiscountAmt').innerText = invoice[i].discount;
