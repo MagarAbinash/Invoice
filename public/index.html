@@ -72,10 +72,6 @@
                     </div>
                     <div class="col-xl-6 col-sm-6 col-md-6">
                         <div class="float-right d-flex flex-wrap">
-                            <!-- <div class="mr-3">
-                                <label class="m-2" for="invoiceId">Invoice#:</label>
-                                <input class="form-control" type="text" id="invoiceId">
-                            </div> -->
                             <div class="">
                                 <label class="m-2" for="date">Date:</label>
                                 <!-- <input class="form-control" type="date" id="date"> -->
@@ -105,10 +101,8 @@
                                 <td colspan="6" class="text-left" style="border-top: solid;">note:</td>
                             </tr>
                             <tr style="border: dashed;">
-                                note:
-                                <td class="text-left" colspan="4" rowspan="6"
-                                    style="border-right: dashed;"
-                                    contenteditable="true" id="noteMsg">
+                                <td colspan="4" rowspan="6" style="border-right: dashed;">
+                                    <textarea class="" id="noteMsg" cols="90" rows="10" onfocus="this.value=''"></textarea>
                                 </td>
                             </tr>
                             <tr>

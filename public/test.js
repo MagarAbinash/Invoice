@@ -171,7 +171,7 @@ function saveInvoice() {
     let subttl = document.getElementById('subToTal').innerHTML;
     let bilDis = document.getElementById('discountAmt').innerHTML;
     let bilVat = document.getElementById('vatAmt').innerHTML;
-    let notemsg = document.getElementById('noteMsg').innerText;
+    let notemsg = document.getElementById('noteMsg').value;
 
 
     if (cname != "" && items.length != 0) {
@@ -194,6 +194,7 @@ function saveInvoice() {
             sub_total = [];
             document.getElementById('customerName').value = "";
             document.getElementById('discountPer').innerText = "0";
+            notemsg.value = "";
             showCart();
             showInvoice();
             getSubTotal();
