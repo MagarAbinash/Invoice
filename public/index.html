@@ -20,11 +20,15 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 
+        <!-- Icons made by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a>
+        from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
+
     <style>
         body {
             background-color: #ece9e6;
         }
     </style>
+    <link rel="icon" href="./invoice.png" type="image/x-icon">
 </head>
 
 <body>
@@ -35,15 +39,15 @@
                 <form id="itemAddForm">
                     <div class="form-group">
                         <label for="itemAddName">Product Title:</label>
-                        <input type="text" class="form-control" id="itemAddName" onfocus= "this.value=''" placeholder="Product name ...">
+                        <input type="text" class="form-control" id="itemAddName" onfocus= "this.value=''" required placeholder="Product name ...">
                     </div>
                     <div class="form-group">
                         <label for="itemAddPrice">Price:</label>
-                        <input type="number" class="form-control" id="itemAddPrice" onfocus= "this.value=''" placeholder="Price">
+                        <input type="number" class="form-control" id="itemAddPrice" onfocus= "this.value=''" required placeholder="Price">
                     </div>
                     <div class="form-group">
                         <label for="itemAddQuantity">Quantity:</label>
-                        <input type="number" class="form-control" id="itemAddQuantity" onfocus= "this.value=''" placeholder="Quantity">
+                        <input type="number" class="form-control" id="itemAddQuantity" onfocus= "this.value=''" required placeholder="Quantity">
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
@@ -103,8 +107,9 @@
                             <tr style="border: dashed;">
                                 <td class="text-left" colspan="4" rowspan="6"
                                     style="border-right: dashed;"
-                                    contenteditable="true" onfocus="this.innerText=''">Here
-                                    goes the notes</td>
+                                    contenteditable="true" onfocus="this.innerText=''" id="noteMsg" placeholder="Here
+                                    goes the notes">
+                                </td>
                             </tr>
                             <tr>
                                 <th>Sub Total: </th>

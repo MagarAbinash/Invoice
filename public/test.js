@@ -13,11 +13,6 @@ var sub_total = [];
 var final = 0;
 let invoice = [];
 
-// onblur ma validation 
-//validataion ko lagi function create gar (data , data ,dta )  itemref , 3 golbal value where valid = false ;
-// if valid ==true only add update gar 
-// onclick ma check d valid info ani add 
-
 function addItem(event) {
     var itemName = document.getElementById('itemAddName').value;
     var itemPrice = document.getElementById('itemAddPrice').value;
@@ -38,11 +33,11 @@ function addItem(event) {
         id: itemId,
         total: newItem.total()
     }
+
     sub_total.push(for_sub_total);
     getSubTotal();
 
     showCart();
-
     event.preventDefault();
 }
 
@@ -85,16 +80,18 @@ function saveEdit() {
     var newName = document.getElementById('editName').value;
     var newPrice = document.getElementById('editPrice').value;
     var newQuantity = document.getElementById('editQuantity').value;
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].id == newId) {
-            items[i].name = newName;
-            items[i].price = newPrice;
-            items[i].qty = newQuantity;
-            sub_total[i].total = items[i].total(); 
+    if (newId != 0 && newName != "" && newPrice != 0 && newQuantity !=0) {
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].id == newId) {
+                items[i].name = newName;
+                items[i].price = newPrice;
+                items[i].qty = newQuantity;
+                sub_total[i].total = items[i].total();
+            }
         }
+        getSubTotal();
+        showCart();
     }
-    getSubTotal();
-    showCart();
 }
 
 function deleteInvoice(id) {
@@ -174,6 +171,7 @@ function saveInvoice() {
     let subttl = document.getElementById('subToTal').innerHTML;
     let bilDis = document.getElementById('discountAmt').innerHTML;
     let bilVat = document.getElementById('vatAmt').innerHTML;
+    let notemsg = document.getElementById('noteMsg').innerText;
 
 
     if (cname != "" && items.length != 0) {
@@ -186,6 +184,7 @@ function saveInvoice() {
                 subT: subttl,
                 discount: bilDis,
                 vat: bilVat,
+                msg: notemsg,
                 amounts: invTotal
             }
 
@@ -248,6 +247,7 @@ function showBills(id) {
             document.getElementById('billdiscountAmt').innerText = invoice[i].discount;
             document.getElementById('billvatAmt').innerText = invoice[i].vat;
             document.getElementById('billtotalAmt').innerText = invoice[i].amounts;
+            document.getElementById('billsNote').innerText = invoice[i].msg;
         }
     }
 }
